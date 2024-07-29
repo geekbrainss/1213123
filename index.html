@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+  <html lang="ru">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Сбор информации</title>
+      <script>
+          async function collectInfo() {
+              // Получаем IP-адрес
+              const response = await fetch('https://api.ipify.org?format=json');
+              const data = await response.json();
+              const ipAddress = data.ip;
+
+              // Получаем информацию о браузере и устройстве
+              const userAgent = navigator.userAgent;
+              const deviceInfo = {
+                  ip: ipAddress,
+                  browser: userAgent,
+                  device: /Mobi|Android/i.test(userAgent) ? 'Мобильное устройство' : 'Настольный компьютер'
+              };
+
+              // Выводим информацию в консоль
+              console.log('Информация о пользователе:', deviceInfo);
+          }
+      </script>
+  </head>
+  <body>
+      <h1>Сбор информации о пользователе</h1>
+      <button onclick="collectInfo()">Собрать информацию</button>
+  </body>
+  </html>
